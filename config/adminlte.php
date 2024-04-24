@@ -313,7 +313,7 @@ return [
         ],
         [
             'text' => 'Horario',
-            'url' => 'dashboard/horaio',
+            'url' => 'dashboard/horario',
             'icon' => 'fas fa-fw fa-calendar',
             /* 'label' => 4, */
             'label_color' => 'success',

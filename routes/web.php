@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
+use App\Http\Controllers\HorarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GaleriaController;
 
@@ -35,7 +36,7 @@ Route::middleware([
         return view('dashboard.index');
     })->name('dashboard'); */
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-    /* Route::get('/dashboard/galeria',[FotoController::class,'index'])->name('galeria'); */
+    Route::resource('/dashboard/horario',HorarioController::class);
     Route::resource('/dashboard/galeria', FotoController::class);
     
     
