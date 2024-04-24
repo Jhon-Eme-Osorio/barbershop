@@ -30,132 +30,176 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dias as $dia)
+                            @foreach ($dias as $key => $dia)
                                 <tr>
                                     <th>{{ $dia }}</th>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="checkbox">
+                                            <input class="form-check-input" type="checkbox"
+                                                name="dias[{{ $loop->index }}][activo]"
+                                                {{ $estadoDias[$dia]->activo ? 'checked' : '' }}>
+                                            <input type="hidden" name="dias[{{ $loop->index }}][dia]"
+                                                value="{{ $dia }}">
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-4">
+                                                <select class="form-select"
+                                                    name="dias[{{ $key }}][apertura_mañana]">
+                                                    @foreach ($horarios as $horario)
+                                                        @if ($horario->dia == $dia)
+                                                            <option value='{{ $horario->apertura_mañana }}'
+                                                                {{ $horario->apertura_mañana == $estadoDias[$dia]->apertura_mañana ? 'selected' : '' }}>
+                                                                {{ $horario->apertura_mañana }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                    <hr>
+                                                    <option value='9:00 AM'>9:00 AM
+                                                    </option>
+                                                    <option value='9:30 AM'>9:30 AM
+                                                    </option>
+                                                    <option value='10:00 AM'>10:00 AM
+                                                    </option>
+                                                    <option value='10:30 AM'>10:30 AM
+                                                    </option>
+                                                    <option value='11:00 AM'>11:00 AM
+                                                    </option>
+                                                    <option value='11:30 AM'>11:30 AM
+                                                    </option>
+                                                    <option value='12:00 PM'>12:00 PM
+                                                    </option>
+                                                    <option value='12:30 PM'>12:30 PM
+                                                    </option>
+                                                    <option value='13:00 PM'>13:00 PM
+                                                    </option>
+                                                    <option value='13:30 PM'>13:30 PM
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4">
+                                                <select class="form-select" name="dias[{{ $key }}][cierre_mañana]">
+                                                    @foreach ($horarios as $horario)
+                                                        @if ($horario->dia == $dia)
+                                                            <option value='{{ $horario->cierre_mañana }}'
+                                                                {{ $horario->cierre_mañana == $estadoDias[$dia]->cierre_mañana ? 'selected' : '' }}>
+                                                                {{ $horario->cierre_mañana }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                    <hr>
+                                                    <option value='9:00 AM'>9:00 AM
+                                                    </option>
+                                                    <option value='9:30 AM'>9:30 AM
+                                                    </option>
+                                                    <option value='10:00 AM'>10:00 AM
+                                                    </option>
+                                                    <option value='10:30 AM'>10:30 AM
+                                                    </option>
+                                                    <option value='11:00 AM'>11:00 AM
+                                                    </option>
+                                                    <option value='11:30 AM'>11:30 AM
+                                                    </option>
+                                                    <option value='12:00 PM'>12:00 PM
+                                                    </option>
+                                                    <option value='12:30 PM'>12:30 PM
+                                                    </option>
+                                                    <option value='13:00 PM'>13:00 PM
+                                                    </option>
+                                                    <option value='13:30 PM'>13:30 PM
+                                                    </option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="row">
                                             <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="apertura_mañana">
-                                                    <option value='9:00'>9:00 AM
+                                                <select class="form-select"
+                                                    name="dias[{{ $key }}][apertura_tarde]">
+                                                    @foreach ($horarios as $horario)
+                                                        @if ($horario->dia == $dia)
+                                                            <option value='{{ $horario->apertura_tarde }}'
+                                                                {{ $horario->apertura_tarde == $estadoDias[$dia]->apertura_tarde ? 'selected' : '' }}>
+                                                                {{ $horario->apertura_tarde }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                    <hr>
+                                                    <option value='14:00 PM'>14:00 PM
                                                     </option>
-                                                    <option value='9:30'>9:30 AM
+                                                    <option value='14:30 PM'>14:30 PM
                                                     </option>
-                                                    <option value='10:00'>10:00 AM
+                                                    <option value='15:00 PM'>15:00 PM
                                                     </option>
-                                                    <option value='10:30'>10:30 AM
+                                                    <option value='15:30 PM'>15:30 PM
                                                     </option>
-                                                    <option value='11:00'>11:00 AM
+                                                    <option value='16:00 PM'>16:00 PM
                                                     </option>
-                                                    <option value='11:30'>11:30 AM
+                                                    <option value='16:30 PM'>16:30 PM
                                                     </option>
-                                                    <option value='12:00'>12:00 PM
+                                                    <option value='17:00 PM'>17:00 PM
                                                     </option>
-                                                    <option value='12:30'>12:30 PM
+                                                    <option value='17:30 PM'>17:30 PM
                                                     </option>
-                                                    <option value='13:00'>13:00 PM
+                                                    <option value='18:00 PM'>18:00 PM
                                                     </option>
-                                                    <option value='13:30'>13:30 PM
+                                                    <option value='18:30 PM'>18:30 PM
+                                                    </option>
+                                                    <option value='19:00 PM'>19:00 PM
+                                                    </option>
+                                                    <option value='19:30 PM'>19:30 PM
+                                                    </option>
+                                                    <option value='20:00 PM'>20:00 PM
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="cierre_mañana">
-                                                    <option value='9:00'>9:00 AM
+                                                <select class="form-select" name="dias[{{ $key }}][cierre_tarde]">
+                                                    @foreach ($horarios as $horario)
+                                                        @if ($horario->dia == $dia)
+                                                            <option value='{{ $horario->cierre_tarde }}'
+                                                                {{ $horario->cierre_tarde == $estadoDias[$dia]->cierre_tarde ? 'selected' : '' }}>
+                                                                {{ $horario->cierre_tarde }}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                    <hr>
+                                                    <option value='14:00 PM'>14:00 PM
                                                     </option>
-                                                    <option value='9:30'>9:30 AM
+                                                    <option value='14:30 PM'>14:30 PM
                                                     </option>
-                                                    <option value='10:00'>10:00 AM
+                                                    <option value='15:00 PM'>15:00 PM
                                                     </option>
-                                                    <option value='10:30'>10:30 AM
+                                                    <option value='15:30 PM'>15:30 PM
                                                     </option>
-                                                    <option value='11:00'>11:00 AM
+                                                    <option value='16:00 PM'>16:00 PM
                                                     </option>
-                                                    <option value='11:30'>11:30 AM
+                                                    <option value='16:30 PM'>16:30 PM
                                                     </option>
-                                                    <option value='12:00'>12:00 PM
+                                                    <option value='17:00 PM'>17:00 PM
                                                     </option>
-                                                    <option value='12:30'>12:30 PM
+                                                    <option value='17:30 PM'>17:30 PM
                                                     </option>
-                                                    <option value='13:00'>13:00 PM
+                                                    <option value='18:00 PM'>18:00 PM
                                                     </option>
-                                                    <option value='13:30'>13:30 PM
+                                                    <option value='18:30 PM'>18:30 PM
+                                                    </option>
+                                                    <option value='19:00 PM'>19:00 PM
+                                                    </option>
+                                                    <option value='19:30 PM'>19:30 PM
+                                                    </option>
+                                                    <option value='20:00 PM'>20:00 PM
                                                     </option>
                                                 </select>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="apertura_tarde">
-                                                    <option value='14:00'>14:00 PM
-                                                    </option>
-                                                    <option value='14:30'>14:30 PM
-                                                    </option>
-                                                    <option value='15:00'>15:00 PM
-                                                    </option>
-                                                    <option value='15:30'>15:30 PM
-                                                    </option>
-                                                    <option value='16:00'>16:00 PM
-                                                    </option>
-                                                    <option value='16:30'>16:30 PM
-                                                    </option>
-                                                    <option value='17:00'>17:00 PM
-                                                    </option>
-                                                    <option value='17:30'>17:30 PM
-                                                    </option>
-                                                    <option value='18:00'>18:00 PM
-                                                    </option>
-                                                    <option value='18:30'>18:30 PM
-                                                    </option>
-                                                    <option value='19:00'>19:00 PM
-                                                    </option>
-                                                    <option value='19:30'>19:30 PM
-                                                    </option>
-                                                    <option value='20:00'>20:00 PM
-                                                    </option>                                                    
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="cierre_tarde">
-                                                    <option value='14:00'>14:00 PM
-                                                    </option>
-                                                    <option value='14:30'>14:30 PM
-                                                    </option>
-                                                    <option value='15:00'>15:00 PM
-                                                    </option>
-                                                    <option value='15:30'>15:30 PM
-                                                    </option>
-                                                    <option value='16:00'>16:00 PM
-                                                    </option>
-                                                    <option value='16:30'>16:30 PM
-                                                    </option>
-                                                    <option value='17:00'>17:00 PM
-                                                    </option>
-                                                    <option value='17:30'>17:30 PM
-                                                    </option>
-                                                    <option value='18:00'>18:00 PM
-                                                    </option>
-                                                    <option value='18:30'>18:30 PM
-                                                    </option>
-                                                    <option value='19:00'>19:00 PM
-                                                    </option>
-                                                    <option value='19:30'>19:30 PM
-                                                    </option>
-                                                    <option value='20:00'>20:00 PM
-                                                    </option>                                                    
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
+
                                 </tr>
-                                @endforeach
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

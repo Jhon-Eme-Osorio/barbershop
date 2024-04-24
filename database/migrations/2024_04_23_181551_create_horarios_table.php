@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('Dia',10);
-            $table->integer('Apertura_mañana');
-            $table->integer('Cierre_mañana');
-            $table->integer('Apertura_tarde');
-            $table->integer('Cierre_tarde');
-            $table->boolean('Activo');
+            $table->string('dia',10);
+            $table->string('apertura_mañana');
+            $table->string('cierre_mañana');
+            $table->string('apertura_tarde');
+            $table->string('cierre_tarde');
+            $table->string('activo');
             $table->timestamps();
         });
     }

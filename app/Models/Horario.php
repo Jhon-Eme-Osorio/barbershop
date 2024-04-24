@@ -10,11 +10,11 @@ class Horario extends Model
     use HasFactory;
 
     protected $fillable = [
-        'Dia',
-        'Apertura_mañana',
-        'Cierre_mañana',
-        'Apertura_tarde',
-        'Cierre_tarde',
-        'Activo',
+        'dia',
+        'apertura_mañana',
+        'cierre_mañana',
+        'apertura_tarde',
+        'cierre_tarde',
+        'activo',
     ];
 }
