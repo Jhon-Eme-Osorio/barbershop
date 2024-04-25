@@ -17,7 +17,7 @@
                             <h2>Horario</h2>
                         </div>
                         <div class="col text-right">
-                            <button type="submit" class="btn btn-primary">Guardar Horario</button>
+                            <button type="submit" class="btn btn-light btn-outline-success">Guardar Horario</button>
                         </div>
                     </div>
                     <table class="table table-dark table-striped">
