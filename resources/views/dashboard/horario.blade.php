@@ -47,7 +47,9 @@
                                         <div class="row">
                                             <div class="col-md-6 col-lg-4">
                                                 <select class="form-select"
-                                                    name="dias[{{ $key }}][apertura_mañana]" id="apertura_mañana_{{ $dia }}" onchange="actualizarCierreManana('{{ $dia }}')">
+                                                    name="dias[{{ $key }}][apertura_mañana]"
+                                                    id="apertura_mañana_{{ $dia }}"
+                                                    onchange="actualizarCierreManana('{{ $dia }}')">
                                                     @foreach ($horarios as $horario)
                                                         @if ($horario->dia == $dia)
                                                             <option value='{{ $horario->apertura_mañana }}'
@@ -80,7 +82,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="dias[{{ $key }}][cierre_mañana]" id="cierre_mañana_{{ $dia }}" >
+                                                <select class="form-select" name="dias[{{ $key }}][cierre_mañana]"
+                                                    id="cierre_mañana_{{ $dia }}">
                                                     @foreach ($horarios as $horario)
                                                         @if ($horario->dia == $dia)
                                                             <option value='{{ $horario->cierre_mañana }}'
@@ -118,7 +121,9 @@
                                         <div class="row">
                                             <div class="col-md-6 col-lg-4">
                                                 <select class="form-select"
-                                                    name="dias[{{ $key }}][apertura_tarde]" id="apertura_tarde{{ $dia }}" onchange="actualizarCierreTarde('{{ $dia }}')">
+                                                    name="dias[{{ $key }}][apertura_tarde]"
+                                                    id="apertura_tarde{{ $dia }}"
+                                                    onchange="actualizarCierreTarde('{{ $dia }}')">
                                                     @foreach ($horarios as $horario)
                                                         @if ($horario->dia == $dia)
                                                             <option value='{{ $horario->apertura_tarde }}'
@@ -157,7 +162,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-                                                <select class="form-select" name="dias[{{ $key }}][cierre_tarde]" id="cierre_tarde{{ $dia }}">
+                                                <select class="form-select" name="dias[{{ $key }}][cierre_tarde]"
+                                                    id="cierre_tarde{{ $dia }}">
                                                     @foreach ($horarios as $horario)
                                                         @if ($horario->dia == $dia)
                                                             <option value='{{ $horario->cierre_tarde }}'
@@ -227,59 +233,67 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
-<script>
-    function actualizarCierreManana(dia) {
-        var aperturaManana = convertirHoraEntero(document.getElementById('apertura_mañana_' + dia).value);
-        var cierreManana = document.getElementById('cierre_mañana_' + dia);
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        // Habilitar todas las opciones en el select de cierre de mañana para este día
-        for (var i = 0; i < cierreManana.options.length; i++) {
-            cierreManana.options[i].disabled = false;
-        }
+    <script>
+        function actualizarCierreManana(dia) {
+            var aperturaManana = convertirHoraEntero(document.getElementById('apertura_mañana_' + dia).value);
+            var cierreManana = document.getElementById('cierre_mañana_' + dia);
 
-        // Deshabilitar las opciones que sean iguales o anteriores a la hora de apertura seleccionada
-        for (var i = 0; i < cierreManana.options.length; i++) {
-            var horaCierre = convertirHoraEntero(cierreManana.options[i].value);
-            if (horaCierre <= aperturaManana) {
-                cierreManana.options[i].disabled = true;
+            // Habilitar todas las opciones en el select de cierre de mañana para este día
+            for (var i = 0; i < cierreManana.options.length; i++) {
+                cierreManana.options[i].disabled = false;
+            }
+
+            // Deshabilitar las opciones que sean iguales o anteriores a la hora de apertura seleccionada
+            for (var i = 0; i < cierreManana.options.length; i++) {
+                var horaCierre = convertirHoraEntero(cierreManana.options[i].value);
+                if (horaCierre <= aperturaManana) {
+                    cierreManana.options[i].disabled = true;
+                }
             }
         }
-    }
 
-    function convertirHoraEntero(hora) {
-        var partes = hora.split(':');
-        var horaEntero = parseInt(partes[0]) * 60 + parseInt(partes[1]);
-        return horaEntero;
-    }
-</script>
-
-<script>
-    function actualizarCierreTarde(dia) {
-        var aperturaTarde = convertirHoraEntero(document.getElementById('apertura_tarde' + dia).value);
-        var cierreTarde = document.getElementById('cierre_tarde' + dia);
-
-        // Habilitar todas las opciones en el select de cierre de mañana para este día
-        for (var i = 0; i < cierreTarde.options.length; i++) {
-            cierreTarde.options[i].disabled = false;
+        function convertirHoraEntero(hora) {
+            var partes = hora.split(':');
+            var horaEntero = parseInt(partes[0]) * 60 + parseInt(partes[1]);
+            return horaEntero;
         }
+    </script>
 
-        // Deshabilitar las opciones que sean iguales o anteriores a la hora de apertura seleccionada
-        for (var i = 0; i < cierreTarde.options.length; i++) {
-            var horaCierre = convertirHoraEntero(cierreTarde.options[i].value);
-            if (horaCierre <= aperturaTarde) {
-                cierreTarde.options[i].disabled = true;
+    <script>
+        function actualizarCierreTarde(dia) {
+            var aperturaTarde = convertirHoraEntero(document.getElementById('apertura_tarde' + dia).value);
+            var cierreTarde = document.getElementById('cierre_tarde' + dia);
+
+            // Habilitar todas las opciones en el select de cierre de mañana para este día
+            for (var i = 0; i < cierreTarde.options.length; i++) {
+                cierreTarde.options[i].disabled = false;
+            }
+
+            // Deshabilitar las opciones que sean iguales o anteriores a la hora de apertura seleccionada
+            for (var i = 0; i < cierreTarde.options.length; i++) {
+                var horaCierre = convertirHoraEntero(cierreTarde.options[i].value);
+                if (horaCierre <= aperturaTarde) {
+                    cierreTarde.options[i].disabled = true;
+                }
             }
         }
-    }
 
-    function convertirHoraEntero(hora) {
-        var partes = hora.split(':');
-        var horaEntero = parseInt(partes[0]) * 60 + parseInt(partes[1]);
-        return horaEntero;
-    }
-</script>
+        function convertirHoraEntero(hora) {
+            var partes = hora.split(':');
+            var horaEntero = parseInt(partes[0]) * 60 + parseInt(partes[1]);
+            return horaEntero;
+        }
+    </script>
 
-
-
+    @if (Session::has('success'))
+        <script>
+            Swal.fire({
+                title: "Horarios actualizados exitosamente!",
+                icon: "success"
+            });
+        </script>
+    @endif
 
 @stop
