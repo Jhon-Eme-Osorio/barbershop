@@ -319,6 +319,13 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Servicios',
+            'url' => 'dashboard/servicios',
+            'icon' => 'fas fa-fw fa-list',
+            /* 'label' => 4, */
+            'label_color' => 'success',
+        ],
+        [
             'text' => 'Portafolio',
             'url' => 'dashboard/galeria',
             'icon' => 'fas fa-fw fa-camera',

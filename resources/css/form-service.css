@@ -1,0 +1,15 @@
+.input-with-unit {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.input-with-unit input {
+    padding-right: 30px; /* Ajusta el espaciado para dejar espacio para el texto 'min' */
+}
+
+.input-with-unit .unit {
+    position: absolute;
+    right: 8px; /* Ajusta la posición del texto 'min' */
+    color: #555; /* Ajusta el color según lo necesites */
+}
