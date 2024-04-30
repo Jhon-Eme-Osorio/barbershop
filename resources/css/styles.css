@@ -61,18 +61,16 @@ html{
   }
 
   .card{
-    width: 130%;
-    margin-top: 50px;
-    margin-right: 10px;
+    width: 100%;
+    width: 250px;
     border: 1px solid rgba(161, 149, 21, 0.615);
     padding: 5px;
-    
     
     
   }
 
   .card-body{
-    height: 150px;
+    max-width: 100%;
     text-align: center;
     border: 1px solid rgba(161, 149, 21, 0.615);
     
@@ -83,28 +81,10 @@ html{
     
   }
 
-  .card-group{
-    display: flex;
-    justify-content: center;
-  }
 
-  .pricing{
-    font-size: 22px;
-    font-weight: bold;
-  }
 
- 
 
-  .carousel-indicators{
-    bottom: -30% !important;
-}
 
-.img-size{
-  width: 200px;
-  height: 200px;
-  margin-bottom: 50px;  
-  
-}
 
 
 .container-hours{
@@ -205,34 +185,7 @@ transform: translateY(-7px);
 
 
 @media only screen and (max-width: 484px) {
-  .carousel-inner{
-    width: 70%;
-    margin-left: 15%;
-  }
-
-  .carousel-item .card-group .col-sm-4:nth-of-type(3) {
-    display: none;
-  }
-
-  .carousel-item .card-group .col-sm-4:nth-of-type(2) {
-    display: none;
-  }
-
-  .carousel{
-    margin-right: 20%;
-  }
-
-  .carousel-indicators{
-    right: -20% !important;
-  }
-
-  .img-size{
-    width: 130px;
-    margin-bottom: 15px;
-    height: 100px;
-    object-fit: cover;
-    
-  }
+  
 
 
   .sect-5{
@@ -243,19 +196,8 @@ transform: translateY(-7px);
 
 }
 
-@media only screen and (max-width: 769px) {
 
-  .carousel-indicators button{
-    display: none;
-  }
 
-  .img-size{
-    
-    margin-bottom: 15px;
-    
-    
-  }
-}
 
 
 

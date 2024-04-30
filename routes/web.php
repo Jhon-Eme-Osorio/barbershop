@@ -4,7 +4,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ServicioController;
-use App\Models\Servicio;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GaleriaController;
 

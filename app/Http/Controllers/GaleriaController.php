@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeria;
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class GaleriaController extends Controller
@@ -11,9 +12,12 @@ class GaleriaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('home.sections',['galeria'=>Galeria::latest()->get()]);
-    }
+{
+    $servicios = Servicio::latest()->get();
+    $galeria = Galeria::latest()->get();
+
+    return view('home.sections', compact('servicios', 'galeria'));
+}
 
     /**
      * Show the form for creating a new resource.

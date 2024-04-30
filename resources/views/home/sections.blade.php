@@ -89,142 +89,52 @@
 
 
 @section('contenido2')
-    <section id="example-2" class="ps-3 sect-2 bg-secondary sect">
+    <section id="example-2" class="ps-3 sect-2 bg-secondary ">
         <div class="sv-title">
             <h2 class="fw-light text-center text-lg  mb-0">Nuestros Servicios</h2>
         </div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+
+
+        <div class="container-lg">
+            <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center " style="gap: 20px;">
+                @foreach ($servicios as $servicio)
+                   
+
+                          <div class="card text-center mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $servicio->nombre }}</h5>
+                                <p class="card-text"><strong>{{ $servicio->precio }}€</strong></p>
+                              <button type="button" class="btn btn-light btn-outline-success"  data-bs-toggle="modal"
+                              data-bs-target="#exampleModal{{ $servicio->id }}">Ver mas
+                          </button>
+                            </div>
+                          </div>
+
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{ $servicio->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card mx-auto" style="max-width: 18rem;"> <!-- Agregamos la clase 'mx-auto' para centrar la tarjeta y 'max-width' para limitar su ancho -->
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $servicio->nombre }}</h5>
+                                            <p class="card-text">{{ $servicio->descripcion }}</p>
+                                            <p class="card-text"><strong>{{ $servicio->precio }}€</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                @endforeach
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="card-group">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">CORTE DE PELO</h5>
-                                    <p class="card-text">Servicio exclusivo según tus necesidades y tu estilo personal.</p>
-                                    <p class="pricing">17€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">ARREGLO DE BARBA</h5>
-                                    <p class="card-text">Servicio tradicional de barbería para sacar el mayor partido a tu
-                                        barba.</p>
-                                    <p class="pricing">17€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">AFEITADO CLÁSICO</h5>
-                                    <p class="card-text">Servicio auténtico de barbería. Experimenta la piel rasurada al
-                                        completo y siéntete como nuevo.</p>
-                                    <p class="pricing">17€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card-group">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">ARREGLO DE BARBA Y RAPADO DE CABEZA</h5>
-                                    <p class="card-text">Complementa tu arreglo de barba con un rapado de cabeza.</p>
-                                    <p class="pricing">22€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">CONTORNOS DE BARBA</h5>
-                                    <p class="card-text">Complementa tu corte de pelo con un repaso de los contornos de la
-                                        barba y el cuello.</p>
-                                    <p class="pricing">22€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">ARREGLO DE BARBA Y CONTORNOS DE PELO</h5>
-                                    <p class="card-text">Complementa tu arreglo de barba con un repaso de los contornos del
-                                        pelo y el cuello.</p>
-                                    <p class="pricing">25€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="card-group">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">ARREGLO DE BARBA CON COLOR</h5>
-                                    <p class="card-text">Complementa tu arreglo de barba dándole un toque personal.</p>
-                                    <p class="pricing">27€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">TINTE DE PELO</h5>
-                                    <p class="card-text">Si quieres un cambio de look con un color nuevo de pelo en
-                                        BARBERSHOP también podemos hacerlo posible.</p>
-                                    <p class="pricing">45€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">TINTE DE BARBA</h5>
-                                    <p class="card-text">Si lo que quieres es cubrir las canas de tu barba para rejuvenecer
-                                        tu imagen en BARBERSHOP también podemos hacerlo posible.</p>
-                                    <p class="pricing">30€</p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
         </div>
 
 
@@ -243,7 +153,8 @@
             <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
                 @foreach ($galeria as $foto)
                     <div class="col">
-                        <button type="button" class="btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $foto->id }}">
+                        <button type="button" class="btn-lg" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal{{ $foto->id }}">
                             <img src="{{ asset($foto->nombre) }}" class="gallery-item img-gallery" alt="Gallery1">
                         </button>
 
