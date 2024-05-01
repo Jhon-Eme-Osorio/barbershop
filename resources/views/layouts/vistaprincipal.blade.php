@@ -10,6 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 
@@ -77,6 +78,40 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/script.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#fecha').change(function () {
+                var selectedDate = $(this).val();
+                $.ajax({
+                    url: "{{ route('obtener.horas.disponibles') }}",
+                    method: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'dia': selectedDate
+                    },
+                    success: function (response) {
+                        //console.log(response);
+                        var horasDisponibles = response.horas;
+                        var selectHora = $('#hora');
+                        selectHora.empty();
+                        selectHora.append($('<option>', {
+                            value: '',
+                            text: 'Selecciona una hora'
+                        }));
+                        $.each(horasDisponibles, function (index, hora) {
+                            selectHora.append($('<option>', {
+                                value: hora,
+                                text: hora
+                            }));
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+    
 </body>
 
 </html>

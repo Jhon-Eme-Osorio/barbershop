@@ -19,6 +19,8 @@ use App\Http\Controllers\GaleriaController;
 */
 
 Route::get('/',[GaleriaController::class,'index'])->name('home.sections');
+Route::post('/obtener-horas-disponibles', [GaleriaController::class, 'generarRangoHoras'])->name('obtener.horas.disponibles');
+
 
 Route::get('/admin', function () {
     return view('auth.login'); // Ahora /admin mostrará la vista de login

@@ -42,20 +42,21 @@
 
                                         <div class="col-md-6">
                                             <label for="date" class="form-label mt-3">Fecha</label>
-                                            <input type="date" class="form-control" id="date">
+                                            <input type="date" class="form-control" id="fecha" name="fecha">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="available-time" class="form-label mt-3">Hora Disponobles</label>
-                                            <select id="available-time" class="form-select">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
+                                            <select id="hora" class="form-select" name="hora">
+                                                <option selected disabled>Selecciona una hora</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="service" class="form-label mt-3">Servicio</label>
-                                            <select id="service" class="form-select">
-                                                <option selected>Choose...</option>
-                                                <option>...</option>
+                                            <select id="service" class="form-select" required>
+                                                <option disabled selected>Elija un servico</option>
+                                                @foreach ($servicios as $servicio)
+                                                <option> {{ $servicio->nombre }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-6">
@@ -98,29 +99,29 @@
         <div class="container-lg">
             <div class="row gy-4 row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-center " style="gap: 20px;">
                 @foreach ($servicios as $servicio)
-                   
+                    <div class="card text-center mb-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $servicio->nombre }}</h5>
+                            <p class="card-text"><strong>{{ $servicio->precio }}€</strong></p>
+                            <button type="button" class="btn btn-light btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal{{ $servicio->id }}">Ver mas
+                            </button>
+                        </div>
+                    </div>
 
-                          <div class="card text-center mb-3" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $servicio->nombre }}</h5>
-                                <p class="card-text"><strong>{{ $servicio->precio }}€</strong></p>
-                              <button type="button" class="btn btn-light btn-outline-success"  data-bs-toggle="modal"
-                              data-bs-target="#exampleModal{{ $servicio->id }}">Ver mas
-                          </button>
-                            </div>
-                          </div>
 
-                    
                     <!-- Modal -->
-                    <div class="modal fade" id="exampleModal{{ $servicio->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="exampleModal{{ $servicio->id }}" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-md">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="card mx-auto" style="max-width: 18rem;"> <!-- Agregamos la clase 'mx-auto' para centrar la tarjeta y 'max-width' para limitar su ancho -->
+                                    <div class="card mx-auto" style="max-width: 18rem;">
+                                        <!-- Agregamos la clase 'mx-auto' para centrar la tarjeta y 'max-width' para limitar su ancho -->
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $servicio->nombre }}</h5>
                                             <p class="card-text">{{ $servicio->descripcion }}</p>
@@ -131,8 +132,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
                 @endforeach
             </div>
         </div>
@@ -187,7 +186,7 @@
         <div class="container-fluid">
             <h2 class="fw-light text-center text-lg">Contacto</h2>
             <div class="row contact">
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3">
                     <div class="container-fluid">
                         <h3>Ven a conocernos</h3>
                         <p>Atrévete a venir a conocernos y disfrutar de una experiencia totalmente diferente, ¡te estamos
@@ -212,7 +211,7 @@
 
                 </div>
 
-                <div class="col-md-4 mt-3">
+                <div class="col-md-3 mt-3">
                     <div class="container-fluid">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194390.01103703328!2d-4.0170353054687515!3d40.4233828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287ab3f77019%3A0x56c00bc05abaf59d!2sPlaza%20de%20Espa%C3%B1a!5e0!3m2!1ses!2ses!4v1712760962369!5m2!1ses!2ses"
@@ -223,21 +222,47 @@
 
                 </div>
 
-                <div class="col-md-4 aling-items-center mt-4 container-hours ">
+                <div class="col-md-6 aling-items-center mt-4 container-hours ">
 
                     <div class="container">
                         <div class="row border-hours">
                             <h2 class="fw-light text-center text-lg  ">Horario</h2>
-                            <div class="col-md-6 col-6 mt-3">
+                            <div class="col-md-4 col-12 mt-3">
                                 <ul class="list-inline">
-                                    <li>Lunes - Viernes</li>
-                                    <li>Sabado</li>
+                                    <li><strong>Dia</strong></li>
+                                    <li>&nbsp</li>
+                                    @foreach ($horarios as $horario)
+                                        <li>{{ $horario->dia }}</li>
+                                    @endforeach
+
                                 </ul>
                             </div>
-                            <div class="col-md-6 col-6 mt-3">
+                            <div class="col-md-4 col-12 mt-3">
+                                <div><strong>Jornada Mañana</strong></div>
                                 <ul class="list-inline">
-                                    <li>9:00 - 14:00 / 16:00 - 20:00</li>
-                                    <li>11:00 - 14:00 / 16:00 - 20:00</li>
+                                    <li>&nbsp</li>
+                                    @foreach ($horarios as $horario)
+                                        @if ($horario->activo == 0)
+                                            <li><strong>Cerrado</strong></li>
+                                        @else
+                                            <li>{{ $horario->apertura_mañana }} - {{ $horario->cierre_mañana }}</li>
+                                        @endif
+                                        
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <div><strong>Jornada Tarde</strong></div>
+                                <ul class="list-inline">
+                                    <li>&nbsp</li>
+                                    @foreach ($horarios as $horario)
+                                        @if ($horario->activo == 0)
+                                            <li><strong>Cerrado</strong></li>
+                                        @else
+                                            <li>{{ $horario->apertura_tarde }} - {{ $horario->cierre_tarde }}</li>
+                                        @endif
+                                        
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
