@@ -78,6 +78,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function () {
@@ -91,26 +92,41 @@
                         'dia': selectedDate
                     },
                     success: function (response) {
-                        //console.log(response);
-                        var horasDisponibles = response.horas;
-                        var selectHora = $('#hora');
-                        selectHora.empty();
-                        selectHora.append($('<option>', {
-                            value: '',
-                            text: 'Selecciona una hora'
-                        }));
-                        $.each(horasDisponibles, function (index, hora) {
-                            selectHora.append($('<option>', {
-                                value: hora,
-                                text: hora
+                        console.log(response);
+                        if (response.showAlert) {
+                            // Mostrar SweetAlert si showAlert es true
+                            Swal.fire({
+                                icon: 'warning',
+                                title: '¡Atención!',
+                                text: response.message
+                            });
+                            // Limpiar el select de horas
+                            $('#hora').empty().append($('<option>', {
+                                value: '',
+                                text: 'Selecciona una hora'
                             }));
-                        });
+                        } else {
+                            // Si showAlert es false, llenar el select de horas con las horas disponibles
+                            var horasDisponibles = response.horas;
+                            var selectHora = $('#hora');
+                            selectHora.empty().append($('<option>', {
+                                value: '',
+                                text: 'Selecciona una hora'
+                            }));
+                            $.each(horasDisponibles, function (index, hora) {
+                                selectHora.append($('<option>', {
+                                    value: hora,
+                                    text: hora
+                                }));
+                            });
+                        }
                     }
                 });
             });
         });
-
     </script>
+    
+    
     
 </body>
 

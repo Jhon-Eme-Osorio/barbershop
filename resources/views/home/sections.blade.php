@@ -36,13 +36,17 @@
                                             <input type="text" class="form-control" id="nameUser">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="email" class="form-label">Correo</label>
+                                            <label for="lastName" class="form-label">Apellido</label>
+                                            <input type="text" class="form-control" id="lastName">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label mt-3">Correo</label>
                                             <input type="email" class="form-control" id="email">
                                         </div>
 
                                         <div class="col-md-6">
                                             <label for="date" class="form-label mt-3">Fecha</label>
-                                            <input type="date" class="form-control" id="fecha" name="fecha">
+                                            <input type="date" class="form-control" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" >
                                         </div>
                                         <div class="col-md-6">
                                             <label for="available-time" class="form-label mt-3">Hora Disponobles</label>
@@ -65,7 +69,7 @@
                                         </div>
                                     </div>
 
-                                    <input type="submit" value="Reservar" class="btn btn-light btn-outline-success"
+                                    <input type="submit" value="Reservar" class="btn btn-light btn-outline-success mt-3"
                                         name="reservar">
                                 </form>
                             </div>

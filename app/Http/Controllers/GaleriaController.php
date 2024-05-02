@@ -25,7 +25,17 @@ class GaleriaController extends Controller
     }
 
     public function generarRangoHoras(Request $request)
-    {
+    {   
+        $citasProgramadas = [
+            '2024-05-08' => [
+                '12:00',
+                '12:30',
+                '18:00', // Simulamos una cita programada a las 12:00 del 8 de mayo de 2024
+                '18:30', // Simulamos otra cita programada a las 14:30 del 8 de mayo de 2024
+            ],
+            // Puedes agregar más fechas y horas para simular citas programadas en otros días
+        ];
+
         // Obtener la fecha seleccionada
         $fechaSeleccionada = $request->input('dia');
 
@@ -83,10 +93,25 @@ class GaleriaController extends Controller
                 $horaInicioTarde = strtotime('+30 minutes', $horaInicioTarde);
             }
             $horas[] = date('H:i', $horaFinTarde);
+        }else{
+            return response()->json([
+                'showAlert' => true,
+                'message' => 'El día seleccionado no tiene servicio disponible'
+            ]);
         }
 
+        if (array_key_exists($fechaSeleccionada, $citasProgramadas)) {
+            // Si hay citas programadas para esa fecha, eliminar las horas correspondientes del array $horas
+            foreach ($citasProgramadas[$fechaSeleccionada] as $horaCita) {
+                if (($key = array_search($horaCita, $horas)) !== false) {
+                    unset($horas[$key]);
+                }
+            }
+        }
+        
+        
         // Devolver las horas disponibles y el día de la semana como respuesta JSON
-        return response()->json(['horas' => $horas, 'diaSemana' => $diaSemana]);
+        return response()->json(['horas' => $horas, 'diaSemana' => $diaSemana, 'fechaSeleccionada' => $fechaSeleccionada]);
     }
 
 
