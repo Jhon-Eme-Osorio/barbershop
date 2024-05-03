@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Galeria;
 use App\Models\Horario;
 use App\Models\Servicio;
+use App\Models\Cita;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -20,12 +21,11 @@ class GaleriaController extends Controller
         $galeria = Galeria::latest()->get();
         $horarios = Horario::latest()->get();
 
-
         return view('home.sections', compact('servicios', 'galeria', 'horarios'));
     }
 
     public function generarRangoHoras(Request $request)
-    {   
+    {
         $citasProgramadas = [
             '2024-05-08' => [
                 '12:00',
@@ -38,7 +38,6 @@ class GaleriaController extends Controller
 
         // Obtener la fecha seleccionada
         $fechaSeleccionada = $request->input('dia');
-
         // Obtener el día de la semana correspondiente a la fecha seleccionada
         $diaSemana = Carbon::parse($fechaSeleccionada)->format('l');
 
@@ -66,6 +65,8 @@ class GaleriaController extends Controller
 
         // Si hay un horario activo para el día seleccionado
         if ($horario) {
+            // Obtener las citas programadas para la fecha seleccionada
+            $citasProgramadas = Cita::where('fecha_cita', $fechaSeleccionada)->pluck('hora_cita')->toArray();
             $aperturaManana = str_replace([" AM", " PM"], "", $horario->apertura_mañana);
             $cierreManana = str_replace([" AM", " PM"], "", $horario->cierre_mañana);
             $aperturaTarde = str_replace([" AM", " PM"], "", $horario->apertura_tarde);
@@ -80,20 +81,32 @@ class GaleriaController extends Controller
             // Iterar sobre cada hora dentro del rango de la mañana
             while ($horaInicioManana < $horaFinManana) {
                 // Agregar la hora al array en formato deseado (24 horas)
-                $horas[] = date('H:i', $horaInicioManana);
+                //$horas[] = date('H:i', $horaInicioManana);
+                // Verificar si la hora está disponible
+                $horaActual = date('H:i', $horaInicioManana);
+                if (!in_array($horaActual, $citasProgramadas)) {
+                    // Agregar la hora al array de horas disponibles
+                    $horas[] = $horaActual;
+                }
                 // Incrementar la hora en intervalos de 30 minutos
                 $horaInicioManana = strtotime('+30 minutes', $horaInicioManana);
             }
-            $horas[] = date('H:i', $horaFinManana);
+
             // Iterar sobre cada hora dentro del rango de la tarde
             while ($horaInicioTarde < $horaFinTarde) {
                 // Agregar la hora al array en formato deseado (24 horas)
-                $horas[] = date('H:i', $horaInicioTarde);
+                //$horas[] = date('H:i', $horaInicioTarde);
+                // Verificar si la hora está disponible
+                $horaActual = date('H:i', $horaInicioTarde);
+                if (!in_array($horaActual, $citasProgramadas)) {
+                    // Agregar la hora al array de horas disponibles
+                    $horas[] = $horaActual;
+                }
                 // Incrementar la hora en intervalos de 30 minutos
                 $horaInicioTarde = strtotime('+30 minutes', $horaInicioTarde);
             }
-            $horas[] = date('H:i', $horaFinTarde);
-        }else{
+            //$horas[] = date('H:i', $horaFinTarde);
+        } else {
             return response()->json([
                 'showAlert' => true,
                 'message' => 'El día seleccionado no tiene servicio disponible'
@@ -108,8 +121,8 @@ class GaleriaController extends Controller
                 }
             }
         }
-        
-        
+
+
         // Devolver las horas disponibles y el día de la semana como respuesta JSON
         return response()->json(['horas' => $horas, 'diaSemana' => $diaSemana, 'fechaSeleccionada' => $fechaSeleccionada]);
     }

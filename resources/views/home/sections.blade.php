@@ -28,49 +28,74 @@
                         </div>
                         <div class="modal-body bg-dark">
                             <div class="col-lg-12">
-                                <form action="#" method="post">
-
+                                <form action="{{ route('guardar.cita') }}" method="post">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label for="nameUser" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="nameUser">
+                                            <input type="text"
+                                                class="form-control  @error('nameUser') is-invalid @enderror" id="nameUser"
+                                                name="nameUser" value="{{ old('nameUser') }}">
+                                            @error('nameUser')
+                                                <span class="invalid-feedback"></span>
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6">
                                             <label for="lastName" class="form-label">Apellido</label>
-                                            <input type="text" class="form-control" id="lastName">
+                                            <input type="text"
+                                                class="form-control @error('lastName') is-invalid @enderror" id="lastName"
+                                                name="lastName" value="{{ old('lastName') }}">
+                                            @error('lastName')
+                                                <span class="invalid-feedback"></span>
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="email" class="form-label mt-3">Correo</label>
-                                            <input type="email" class="form-control" id="email">
+                                            <label for="correo" class="form-label mt-3 ">Correo</label>
+                                            <input type="email" class="form-control @error('correo') is-invalid @enderror"
+                                                id="correo" name="correo" value="{{ old('correo') }}">
+                                            @error('correo')
+                                                <span class="invalid-feedback"></span>
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="date" class="form-label mt-3">Fecha</label>
-                                            <input type="date" class="form-control" id="fecha" name="fecha" min="{{ date('Y-m-d') }}" >
+                                            <label for="fecha" class="form-label mt-3">Fecha</label>
+                                            <input type="date" class="form-control @error('fecha') is-invalid @enderror"
+                                                id="fecha" name="fecha" min="{{ date('Y-m-d') }}"
+                                                value="{{ old('fecha') }}">
+                                            @error('fecha')
+                                                <span class="invalid-feedback"></span>
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="available-time" class="form-label mt-3">Hora Disponobles</label>
-                                            <select id="hora" class="form-select" name="hora">
+                                            <label for="hora" class="form-label mt-3">Hora Disponobles</label>
+                                            <select id="hora" class="form-select @error('hora') is-invalid @enderror"
+                                                name="hora">
                                                 <option selected disabled>Selecciona una hora</option>
                                             </select>
+                                            @error('hora')
+                                                <span class="invalid-feedback"></span>
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </div>
                                         <div class="col-md-6">
                                             <label for="service" class="form-label mt-3">Servicio</label>
-                                            <select id="service" class="form-select" required>
+                                            <select id="service" class="form-select" name="servicio" required>
                                                 <option disabled selected>Elija un servico</option>
                                                 @foreach ($servicios as $servicio)
-                                                <option> {{ $servicio->nombre }}</option>
+                                                    <option value="{{ $servicio->id }}"> {{ $servicio->nombre }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="comment" class="form-label mt-3">Nota (Opcional)</label>
-                                            <textarea class="form-control" id="comment"></textarea>
+                                        <div class="col-md-3 ">
+                                            <input type="submit" value="Reservar"
+                                                class="btn btn-light btn-outline-success mt-3" name="reservar">
                                         </div>
                                     </div>
-
-                                    <input type="submit" value="Reservar" class="btn btn-light btn-outline-success mt-3"
-                                        name="reservar">
                                 </form>
                             </div>
                         </div>
@@ -251,7 +276,6 @@
                                         @else
                                             <li>{{ $horario->apertura_mañana }} - {{ $horario->cierre_mañana }}</li>
                                         @endif
-                                        
                                     @endforeach
                                 </ul>
                             </div>
@@ -265,7 +289,6 @@
                                         @else
                                             <li>{{ $horario->apertura_tarde }} - {{ $horario->cierre_tarde }}</li>
                                         @endif
-                                        
                                     @endforeach
                                 </ul>
                             </div>

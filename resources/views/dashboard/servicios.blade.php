@@ -44,7 +44,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="number" class="form-label">Duracion</label>
+                                            <label for="duracion" class="form-label">Duracion</label>
                                             <div class="input-with-unit">
                                                 <input type="number"
                                                     class="form-control @error('duracion') is-invalid @enderror"
@@ -58,7 +58,7 @@
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="number" class="form-label  mt-3">Precio</label>
+                                            <label for="precio" class="form-label  mt-3">Precio</label>
                                             <input type="number" step="0.01"
                                                 class="form-control @error('precio') is-invalid @enderror"
                                                 value="{{ old('precio') }}" id="precio" name="precio">
@@ -168,7 +168,7 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="number" class="form-label">Duracion</label>
+                                                        <label for="duracion" class="form-label">Duracion</label>
                                                         <div class="input-with-unit">
                                                             <input type="number"
                                                                 class="form-control @error('duracion') is-invalid @enderror"
@@ -183,7 +183,7 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                        <label for="number" class="form-label  mt-3">Precio</label>
+                                                        <label for="precio" class="form-label  mt-3">Precio</label>
                                                         <input type="number" step="0.01"
                                                             class="form-control @error('precio') is-invalid @enderror"
                                                             value="{{ $servicio->precio }}" id="precio"
@@ -264,6 +264,7 @@
             $('#servicios').DataTable({
                 'language': {
                     'url': 'https://cdn.datatables.net/plug-ins/2.0.5/i18n/es-ES.json',
+                    'searchPlaceholder': 'Nombre o Precio'
                 },
                 'lengthMenu': [
                     [5, 10, 50, -1],
@@ -271,7 +272,7 @@
                 ],
                 "ordering": false,
                 'columnDefs':[{
-                    /* 'searchable': false, 'target': [1,2,3], */
+                    'searchable': false, 'targets': [1, 2]
                     
                 }]
                 

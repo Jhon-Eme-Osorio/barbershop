@@ -13,7 +13,7 @@ class ServicioController extends Controller
      */
     public function index()
     {
-        $servicios = Servicio::all();
+        $servicios = Servicio::latest()->get();
         return view('dashboard/servicios')->with('servicios',$servicios);
     }
 

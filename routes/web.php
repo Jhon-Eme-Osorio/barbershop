@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\CitaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GaleriaController;
 
@@ -20,6 +21,7 @@ use App\Http\Controllers\GaleriaController;
 
 Route::get('/',[GaleriaController::class,'index'])->name('home.sections');
 Route::post('/obtener-horas-disponibles', [GaleriaController::class, 'generarRangoHoras'])->name('obtener.horas.disponibles');
+Route::post('/',  [CitaController::class, 'guardarCita'])->name('guardar.cita');
 
 
 Route::get('/admin', function () {
@@ -39,6 +41,7 @@ Route::middleware([
         return view('dashboard.index');
     })->name('dashboard'); */
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::resource('/dashboard/citas', CitaController::class);
     Route::resource('/dashboard/horario',HorarioController::class);
     Route::resource('/dashboard/servicios',ServicioController::class);
     Route::resource('/dashboard/galeria', FotoController::class);

@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Servicio extends Model
+class Cliente extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nombre',
-        'descripcion',
-        'duracion',
-        'precio',
+        'apellido',
+        'correo',
     ];
 
-    //relacion 1:N
+    // relacion 1:N
 
     public function citas(){
         return $this->hasMany(Cita::class, 'id');
     }
 }
-

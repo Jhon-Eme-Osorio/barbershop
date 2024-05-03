@@ -305,16 +305,27 @@ return [
             'topnav_right' => false,
         ],
         [
-            'text' => 'Inicio',
-            'url' => 'dashboard',
+            'text' => 'Citas',           
             'icon' => 'fas fa-fw fa-home',
             /* 'label' => 4, */
             'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Calendario',
+                    'url' => 'dashboard', 
+                    'icon' => 'fas fa-fw fa-calendar',
+                ],
+                [
+                    'text' => 'Todas las citas',
+                    'url' => 'dashboard/citas',
+                    'icon' => 'fas fa-fw fa-clipboard-list',
+                ]
+            ],
         ],
         [
             'text' => 'Horario',
             'url' => 'dashboard/horario',
-            'icon' => 'fas fa-fw fa-calendar',
+            'icon' => 'fas fa-fw fa-clock',
             /* 'label' => 4, */
             'label_color' => 'success',
         ],
@@ -345,59 +356,59 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         /* [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
-                ],
-            ],
-        ], */
-        /* ['header' => 'labels'],
-        [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
-        ],
-        [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
-        ],
-        [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
-        ], */
+           'text' => 'multilevel',
+           'icon' => 'fas fa-fw fa-share',
+           'submenu' => [
+               [
+                   'text' => 'level_one',
+                   'url' => 'dashboard/servicios',
+               ],
+               [
+                   'text' => 'level_one',
+                   'url' => '#',
+                   'submenu' => [
+                       [
+                           'text' => 'level_two',
+                           'url' => '#',
+                       ],
+                       [
+                           'text' => 'level_two',
+                           'url' => '#',
+                           'submenu' => [
+                               [
+                                   'text' => 'level_three',
+                                   'url' => '#',
+                               ],
+                               [
+                                   'text' => 'level_three',
+                                   'url' => '#',
+                               ],
+                           ],
+                       ],
+                   ],
+               ],
+               [
+                   'text' => 'level_one',
+                   'url' => '#',
+               ],
+           ],
+       ], 
+       /* ['header' => 'labels'],
+       [
+           'text' => 'important',
+           'icon_color' => 'red',
+           'url' => '#',
+       ],
+       [
+           'text' => 'warning',
+           'icon_color' => 'yellow',
+           'url' => '#',
+       ],
+       [
+           'text' => 'information',
+           'icon_color' => 'cyan',
+           'url' => '#',
+       ], */
     ],
 
     /*
