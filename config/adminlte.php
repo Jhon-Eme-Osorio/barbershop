@@ -83,16 +83,16 @@ return [
     |
     */
 
-    /* 'auth_logo' => [
-        'enabled' => false,
+    'auth_logo' => [
+        'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 65,
+            'height' => 65,
         ],
-    ], */
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -113,11 +113,11 @@ return [
         'enabled' => true,
         'mode' => 'fullscreen',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 260,
+            'height' => 260,
         ],
     ],
 
@@ -171,12 +171,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => 'bg-gradient-dark',
     'classes_auth_header' => '',
-    'classes_auth_body' => '',
+    'classes_auth_body' => 'bg-gradient-dark',
     'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_icon' => 'fa-fw text-light',
+    'classes_auth_btn' => 'btn btn-light btn-outline-success',
 
     /*
     |--------------------------------------------------------------------------
@@ -305,14 +305,14 @@ return [
             'topnav_right' => false,
         ],
         [
-            'text' => 'Citas',           
+            'text' => 'Citas',
             'icon' => 'fas fa-fw fa-home',
             /* 'label' => 4, */
             'label_color' => 'success',
             'submenu' => [
                 [
                     'text' => 'Calendario',
-                    'url' => 'dashboard', 
+                    'url' => 'dashboard',
                     'icon' => 'fas fa-fw fa-calendar',
                 ],
                 [
