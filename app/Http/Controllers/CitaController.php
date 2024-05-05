@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servicio;
+use App\Notifications\BARBERSHOP;
+use App\Notifications\CitaCanceladaNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Models\Cliente;
 use App\Models\cita;
@@ -50,28 +53,39 @@ class CitaController extends Controller
         }
 
         // Verificar si el cliente ya existe
-        $cliente = Cliente::where('correo', $request->input('correo'))->first();
+        $cliente = Cliente::where('email', $request->input('correo'))->first();
 
         // Si el cliente no existe, crear uno nuevo
         if (!$cliente) {
             $cliente = new Cliente();
             $cliente->nombre = $request->input('nameUser');
             $cliente->apellido = $request->input('lastName');
-            $cliente->correo = $request->input('correo');
+            $cliente->email = $request->input('correo');
             $cliente->save();
         }
 
         // Crear la cita asociada al cliente
         $cita = new Cita();
+        $token = Str::random(10);
         $cita->fecha_cita = $request->input('fecha');
         $cita->hora_cita = $request->input('hora');
         $cita->estado = "por atender";
         $cita->id_cliente = $cliente->id;
         $cita->id_servicio = $request->input('servicio');
-        ;
+        $cita->token = $token;
 
         $cita->save();
+        $nombre = $request->input('nameUser')." ".$request->input('lastName');
 
+
+        $servicioCliente = Servicio::find($cita->id_servicio);
+        $nombreServicio = $servicioCliente->nombre;
+
+        $hora = $request->input('hora');
+
+        $hora = ($hora < 12) ? $hora.' AM' : $hora.' PM';
+        
+        $cliente->notify(new BARBERSHOP($nombre, $request->input('fecha'), $hora , $nombreServicio, $token) );
         return redirect()->back()->with('success', 'creado');
     }
 
@@ -79,12 +93,38 @@ class CitaController extends Controller
     {
 
         $cita = Cita::findOrFail($id);
+        $cliente = Cliente::findOrFail($cita->id_cliente);
+        $nombre = $cliente->nombre.' '.$cliente->apellido;
+        
 
         $cita->estado = $request->get('estado');
 
         $cita->save();
-
+        
+        if ($cita->estado == 'cancelado'){
+            $cliente->notify(new CitaCanceladaNotification($nombre) );
+        }
 
         return redirect()->back()->with('update', ' ');
+    }
+
+    public function cancelarCita(Request $request, $token)
+    {
+        // Buscar la cita en la base de datos utilizando el token
+        $cita = Cita::where('token', $token)->first();
+
+        if (!$cita) {
+            // Si no se encuentra la cita asociada al token, redirecciona a una página de error o muestra un mensaje de error
+            return redirect()->route('home.sections')->with(' ', 'El token de cancelación no es válido.');
+        }
+
+        if($cita->estado == 'cancelado' || $cita->estado == 'atendido'){
+            return redirect()->route('home.sections')->with('sin_cita', 'No tienes cita para cancelar.');
+        }
+        
+        $cita->estado = 'cancelado';
+        $cita->save();
+
+        return redirect()->route('cancelaCita')->with('cita_cancelada', 'La cita ha sido cancelada correctamente.');
     }
 }

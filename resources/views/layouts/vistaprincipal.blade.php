@@ -146,6 +146,16 @@
     @endif
 
 
+    @if (Session::has('sin_cita'))
+        <script>
+            Swal.fire({
+                title: "No tienes ninguna cita para cancelar!",
+                icon: "warning"
+            });
+        </script>
+    @endif
+
+
 
 </body>
 

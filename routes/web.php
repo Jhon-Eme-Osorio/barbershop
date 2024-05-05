@@ -20,13 +20,18 @@ use App\Http\Controllers\GaleriaController;
 */
 
 Route::get('/',[GaleriaController::class,'index'])->name('home.sections');
+Route::get('/home.cancelaCita/{token}', [CitaController::class, 'cancelarCita'])->name('cancelar-cita');
 Route::post('/obtener-horas-disponibles', [GaleriaController::class, 'generarRangoHoras'])->name('obtener.horas.disponibles');
 Route::post('/',  [CitaController::class, 'guardarCita'])->name('guardar.cita');
 
 
 Route::get('/admin', function () {
-    return view('auth.login'); // Ahora /admin mostrará la vista de login
-});
+    return view('auth.login'); 
+})->name('admin');
+
+Route::get('/home.cancelaCita', function () {
+    return view('home.cancelaCita'); 
+})->name('cancelaCita');
 
 
 

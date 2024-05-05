@@ -39,7 +39,7 @@
                     @foreach ($citas as $cita)
                         <tr>
                             <td>{{ $cita->cliente->nombre }} {{ $cita->cliente->apellido }}</td>
-                            <td>{{ $cita->cliente->correo }}</td>
+                            <td>{{ $cita->cliente->email }}</td>
                             <td>{{ $cita->fecha_cita }}</td>
                             <td>
                                 @if ($cita->hora_cita < 12)
@@ -102,7 +102,7 @@
                                                         <input type="email"
                                                             class="form-control @error('correo') is-invalid @enderror"
                                                             id="correo" name="correo"
-                                                            value="{{ $cita->cliente->correo }}" readonly>
+                                                            value="{{ $cita->cliente->email }}" readonly>
                                                         @error('correo')
                                                             <span class="invalid-feedback"></span>
                                                             <strong>{{ $message }}</strong>

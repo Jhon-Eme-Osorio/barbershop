@@ -20,3 +20,7 @@
     height: auto;
     max-height: 60vh; 
   }
+
+  .img-card{
+    height: 120px;
+  }
