@@ -224,7 +224,7 @@
                         <p><strong>BARBERSHOP</strong></br>
                             Plaza España</br></br>
                             <strong>Telefono</strong></br>
-                            +34 91 361 23 45
+                            +34 12 345 67 89
                         </p>
                         <p><strong>Redes Sociales</strong></p>
                         <div class="wrapper">

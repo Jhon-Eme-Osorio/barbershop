@@ -9,7 +9,6 @@ class Cita extends Model
 {
     use HasFactory;
 
-    //relacion 1:N inversa
 
     protected $fillable = [
         'fecha_cita',
@@ -19,6 +18,7 @@ class Cita extends Model
         'id_servicio',
     ];
 
+    //relacion 1:N inversa
     public function cliente(){
         return $this->belongsTo(Cliente::class, 'id_cliente');
     }
