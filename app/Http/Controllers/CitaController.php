@@ -64,11 +64,18 @@ class CitaController extends Controller
             $cliente->save();
         }
 
+        $servicioCliente = Servicio::find($request->input('servicio'));
+        $duracionServicio = $servicioCliente->duracion;
+
+        $hora = $request->input('hora');
+        $horaFinCita = date('H:i', strtotime("$hora + $duracionServicio minutes"));
+
         // Crear la cita asociada al cliente
         $cita = new Cita();
         $token = Str::random(10);
         $cita->fecha_cita = $request->input('fecha');
         $cita->hora_cita = $request->input('hora');
+        $cita->hora_fin_cita = $horaFinCita;
         $cita->estado = "por atender";
         $cita->id_cliente = $cliente->id;
         $cita->id_servicio = $request->input('servicio');
@@ -78,14 +85,17 @@ class CitaController extends Controller
         $nombre = $request->input('nameUser')." ".$request->input('lastName');
 
 
-        $servicioCliente = Servicio::find($cita->id_servicio);
+        
         $nombreServicio = $servicioCliente->nombre;
 
-        $hora = $request->input('hora');
+        
+
+        
+
 
         $hora = ($hora < 12) ? $hora.' AM' : $hora.' PM';
         
-        $cliente->notify(new BARBERSHOP($nombre, $request->input('fecha'), $hora , $nombreServicio, $token) );
+        //$cliente->notify(new BARBERSHOP($nombre, $request->input('fecha'), $hora , $nombreServicio, $token) );
         return redirect()->back()->with('success', 'creado');
     }
 
@@ -102,7 +112,7 @@ class CitaController extends Controller
         $cita->save();
         
         if ($cita->estado == 'cancelado'){
-            $cliente->notify(new CitaCanceladaNotification($nombre) );
+            //$cliente->notify(new CitaCanceladaNotification($nombre) );
         }
 
         return redirect()->back()->with('update', ' ');

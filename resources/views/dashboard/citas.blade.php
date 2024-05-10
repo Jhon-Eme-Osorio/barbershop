@@ -28,8 +28,9 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Correo</th>
-                        <th scope="col">Fecha</th>
+                        <th class="text-center" scope="col">Fecha</th>
                         <th scope="col">Hora</th>
+                        <th scope="col">Hora fin Cita</th>
                         <th scope="col">Servicio</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Acciones</th>
@@ -40,12 +41,19 @@
                         <tr>
                             <td>{{ $cita->cliente->nombre }} {{ $cita->cliente->apellido }}</td>
                             <td>{{ $cita->cliente->email }}</td>
-                            <td>{{ $cita->fecha_cita }}</td>
+                            <td class="text-center">{{ $cita->fecha_cita }}</td>
                             <td>
                                 @if ($cita->hora_cita < 12)
                                     {{ $cita->hora_cita }} AM
                                 @else
                                     {{ $cita->hora_cita }} PM
+                                @endif
+                            </td>
+                            <td>
+                                @if ($cita->hora_fin_cita < 12)
+                                    {{ $cita->hora_fin_cita }} AM
+                                @else
+                                    {{ $cita->hora_fin_cita }} PM
                                 @endif
                             </td>
                             <td>{{ $cita->servicio->nombre }}</td>
@@ -150,7 +158,8 @@
                                                         <select id="estado" class="form-select" name="estado"
                                                             @if ($cita->estado == 'atendido') disabled @endif>
                                                             <option value="por atender"
-                                                                @if ($cita->estado == 'por atender') selected @endif>por
+                                                                @if ($cita->estado == 'por atender') selected disabled @endif>
+                                                                por
                                                                 atender</option>
                                                             <option value="atendido"
                                                                 @if ($cita->estado == 'atendido') selected @endif>atendido
@@ -230,7 +239,7 @@
                 "ordering": false,
                 'columnDefs': [{
                     'searchable': false,
-                    'targets': [0, 2, 3, 4]
+                    'targets': [0, 2, 3, 4, 5]
 
                 }]
 
@@ -238,7 +247,7 @@
         });
     </script>
 
-    <script>
+     <script>
         $('.fecha-cita').change(function() {
             var selectedDate = $(this).val();
             var modal = $(this).closest('.modal'); // Obtener el modal padre del input de fecha

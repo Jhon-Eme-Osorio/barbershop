@@ -46,7 +46,7 @@ class FotoController extends Controller
 
 
         $totalRegistros = Galeria::count();
-        // Verifica si el número de ejecuciones es menor o igual a 2
+        // Verifica si el número de ejecuciones es menor o igual a 8
         if ($totalRegistros < 8) {
 
 

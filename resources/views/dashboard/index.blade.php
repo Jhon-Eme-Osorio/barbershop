@@ -62,7 +62,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="hora" class="form-label mt-3">Hora Disponobles</label>
+                                        <label for="hora" class="form-label mt-3">Hora Disponibles</label>
                                         <select id="hora" class="form-select @error('hora') is-invalid @enderror"
                                             name="hora">
                                             <option selected disabled>Selecciona una hora</option>
@@ -143,7 +143,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="hora" class="form-label mt-3">Hora
-                                                Disponobles</label>
+                                                Cita</label>
                                             <select id="hora"
                                                 class="form-select hora-select @error('hora') is-invalid @enderror"
                                                 name="hora" disabled>
@@ -171,7 +171,7 @@
                                             <select id="estado" class="form-select" name="estado"
                                                 @if ($cita->estado == 'atendido' || $cita->estado == 'cancelado') disabled @endif>
                                                 <option value="por atender"
-                                                    @if ($cita->estado == 'por atender') selected @endif>por
+                                                    @if ($cita->estado == 'por atender') selected disabled @endif>por
                                                     atender</option>
                                                 <option value="atendido"
                                                     @if ($cita->estado == 'atendido') selected @endif>atendido
@@ -204,10 +204,6 @@
     <div class='row justify-content-center'>
         <div class='col-md-12'>
             <div class=”card”>
-
-                <div class='card-header'>
-
-                </div>
                 <div class='card-body mb-4'>
                     <div id='calendar'></div>
                 </div>
@@ -226,11 +222,13 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
 
 
 @stop

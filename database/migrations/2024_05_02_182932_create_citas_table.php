@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->date('fecha_cita');
             $table->string('hora_cita');
+            $table->string('hora_fin_cita');
             $table->string('estado');
             $table->text('nota')->nullable();
             $table->foreignId('id_cliente')

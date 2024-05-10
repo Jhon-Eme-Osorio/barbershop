@@ -72,7 +72,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="hora" class="form-label mt-3">Hora Disponobles</label>
+                                            <label for="hora" class="form-label mt-3">Hora Disponibles</label>
                                             <select id="hora" class="form-select @error('hora') is-invalid @enderror"
                                                 name="hora">
                                                 <option selected disabled>Selecciona una hora</option>
