@@ -10,7 +10,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <h1 class="text-white">Subir imagen</h1>
                         <form action="/dashboard/galeria" method="post" enctype="multipart/form-data">
                             @csrf
@@ -31,7 +31,7 @@
                         </form>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <h1 class="text-white text-center">Galeria de Imagenes</h1>
                         <hr>
 

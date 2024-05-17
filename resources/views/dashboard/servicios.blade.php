@@ -133,7 +133,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="btn btn-light btn-outline-danger btn-sm mr-4">Eliminar</button>
+                                                class="btn btn-light btn-outline-danger btn-sm ">Eliminar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -272,8 +272,9 @@
                 ],
                 "ordering": false,
                 'columnDefs':[{
-                    'searchable': false, 'targets': [1, 2]
-                    
+                    'searchable': false, 'targets': [1, 2],
+                    'width': "25%", 'targets': 4,
+                    'autoWidth': false,                   
                 }]
                 
             });
